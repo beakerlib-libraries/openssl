@@ -1,0 +1,11 @@
+summary: Library for creating X.509 certificates for any use
+description:
+    Library for easy generation of complex certificates
+    (openssl/certgen).
+contact: Hubert Kario <hkario@redhat.com>
+component:
+- openssl
+test: ./runtest.sh
+require:
+- openssl
+duration: 30m
