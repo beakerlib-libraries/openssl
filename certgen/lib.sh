@@ -304,10 +304,15 @@ __INTERNAL_x509GenConfig() {
     #
     # for Ed25519 we can't specify a hash as it is built-in
     #
-    if ${x509OPENSSL} pkey -in "$kAlias/$x509PKEY" -noout -text | grep -qE '^(ED25519|ED448)'; then
+    if ${x509OPENSSL} pkey -in "$kAlias/$x509PKEY" -noout -text 2> /dev/null | grep -qE '^(ED25519|ED448)'; then
         md="null"
     fi
 
+    # in openssl 1.1.1 the oid was renamed to uppercase and the
+    # lower case stopped working, so fix it
+    if ! ${x509OPENSSL} version | grep -Eq '0[.]9[.]|1[.]0[.]'; then
+        extendedKeyUsage="${extendedKeyUsage/ocspSigning/OCSPSigning}"
+    fi
 
     #
     # generate config
