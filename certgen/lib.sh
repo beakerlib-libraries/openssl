@@ -2,8 +2,8 @@
 #
 # This is the openssl/certgen library wrapper
 #
-# library-prefix = x509
+# library-prefix = x509Wrapper
 
-x509LibraryLoaded() {
+x509WrapperLibraryLoaded() {
     rlRun "rlImport certgen/certgen"
 }
